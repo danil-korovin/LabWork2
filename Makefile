@@ -1,4 +1,4 @@
-PROJECT = main
+PROJECT = game
 LIBPROJECT = $(PROJECT).a
 TESTPROJECT = test-$(PROJECT)
 CXX = g++
