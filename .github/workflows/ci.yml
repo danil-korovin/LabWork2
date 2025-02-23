@@ -1,0 +1,35 @@
+name: CI test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  setup_and_build:
+    name: Настройка и запуск билда
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Печать окружения. Окружение — это интересно.
+        run: env
+
+      - name: Установка Clang
+        uses: egor-tensin/setup-clang@v1
+        with:
+          version: latest
+          platform: x64
+
+      - name: Установка make
+        run: |
+          sudo apt-get update
+          sudo apt-get install build-essential
+
+      - name: Actions
+        uses: actions/checkout@v4
+
+      - name: Собираем программу
+        run: |
+          cd Tese
+          ./build.sh
