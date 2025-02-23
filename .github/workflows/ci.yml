@@ -31,5 +31,5 @@ jobs:
 
       - name: Собираем программу
         run: |
-          cd Tese
+          cd Test
           ./build.sh
