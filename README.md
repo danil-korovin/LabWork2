@@ -5,8 +5,12 @@
 ## Contacts
 st128737@student.spbu.ru
 ## Description
-Card game
+Card game. Read the architecture.
 ## Build
 make -f Makefile
 ## Run 
-./test-game
+./card_game
+## Build test
+make test
+## Run 
+./card_game_tests

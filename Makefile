@@ -1,43 +1,39 @@
-PROJECT = game
-LIBPROJECT = $(PROJECT).a
-TESTPROJECT = test-$(PROJECT)
 CXX = g++
-A = ar
-AFLAGS = rsv
-CСXFLAGS = -I. -std=c++17 -Werror -Wpedantic -Wall -g -fPIC
-LDXXFLAGS = $(CCXFLAGS) -L. -l:$(LIBPROJECT)
-LDGTESTFLAGS = $(LDXXFLAGS) -lgtest -lgtest_main -lpthread
-DEPS=$(wildcard *.h)
-OBJ=Main.o
-TEST-OBJ=GoogleTest.o
+CXXFLAGS = -Wall -Wextra -std=c++17 -Iinclude -g 
+LDFLAGS = -lgtest -lgtest_main -pthread
 
-.PHONY: default
+SRCDIR = src
+INCDIR = include
+TESTDIR = test
+BUILDDIR = build
 
-default: all;
+SOURCES = $(wildcard $(SRCDIR)/*.cpp)
+HEADERS = $(wildcard $(INCDIR)/*.h)
+OBJECTS = $(patsubst $(SRCDIR)/%.cpp,$(BUILDDIR)/%.o,$(SOURCES))
+TEST_SOURCES = $(wildcard $(TESTDIR)/*_test.cpp)
+TEST_OBJECTS = $(patsubst $(TESTDIR)/%.cpp,$(BUILDDIR)/%.o,$(TEST_SOURCES))
 
-%.o: %.cpp $(DEPS)
-	$(CXX) -c -o $@ $< $(CXXFLAGS)
+TARGET = card_game
+TEST_TARGET = card_game_tests
 
-$(LIBPROJECT): $(OBJ)
-	$(A) $(AFLAGS) $@ $^
+all: $(TARGET)
 
-$(PROJECT): Main.o $(LIBPROJECT)
-	$(CXX) -o $@ Main.o $(LDXXFLAGS)
+$(TARGET): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJECTS)
 
+$(BUILDDIR)/%.o: $(SRCDIR)/%.cpp $(HEADERS)
+	@mkdir -p $(BUILDDIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(TESTPROJECT): $(LIBPROJECT) $(TEST-OBJ)
-	$(CXX) -o $@ $(TEST-OBJ) $(LDGTESTFLAGS)
+test: $(TEST_TARGET)
+	./$(TEST_TARGET)
 
-test: $(TESTPROJECT)
+$(TEST_TARGET): $(OBJECTS) $(TEST_OBJECTS)
+	$(CXX) $(CXXFLAGS) -o $(TEST_TARGET) $(OBJECTS) $(TEST_OBJECTS) $(LDFLAGS)
 
-all: $(PROJECT)
-
-.PHONY: clean
+$(BUILDDIR)/%_test.o: $(TESTDIR)/%_test.cpp $(HEADERS)
+	@mkdir -p $(BUILDDIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.o
-
-cleanall: clean
-	rm -f $(PROJECT)
-	rm -f $(LIBPROJECT)
-	rm -f $(TESTPROJECT)
+	rm -rf $(BUILDDIR) $(TARGET) $(TEST_TARGET)
