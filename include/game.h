@@ -5,17 +5,17 @@
 
 class Game {
 public:
-    Game();
-    void playPvP();
-    void playPvE();
-    void loadGame();
-    void saveGame();
-    void showHighScores();
-
+    Game(); // Конструктор класса Game.
+    void playPvP(); // Запускает PvP
+    void playPvE(); // Запускает PvE
+    void loadGame(); // Загружает сохраненную игру 
+    void saveGame(); // Сохраняет текущее состояние
+    void showHighScores(); // Показывает рекорды
+    
 private:
-    void dealInitialHands(Player& player1, Player& player2);
-    Card generateRandomCard();
-    void playerTurn(Player& player, Player& opponent);
+    void dealInitialHands(Player& player1, Player& player2); // Раздает начальные карты игрокам. Принимает ссылки на объекты Player.
+    Card generateRandomCard();  // Генерирует случайную карту. Возвращает объект Card.
+    void playerTurn(Player& player, Player& opponent); // Реализует ход игрока. Принимает ссылки на игроков.
 };
 
 #endif
