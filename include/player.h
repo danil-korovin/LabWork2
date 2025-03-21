@@ -7,8 +7,8 @@
 class Player {
 public:
     std::vector<Card> hand;
-    int score;
     std::string name;
+    int score;
     SuperPower currentSuperPower;
     int mana;
     Player(std::string name); // Конструктор класса Player

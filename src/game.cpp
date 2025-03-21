@@ -33,8 +33,27 @@ void Game::playPvP() {
 }
 
 void Game::playPvE() {
+    //Создаём игроков
+    Player player1("Player 1");
+    Player player2("CPU");
+    //Раздаём карты игрокам
+    dealInitialHands(player1, player2);
+    //Определяем чей ход
+    while (!player1.hand.empty() && !player2.hand.empty()) {
+        playerTurn(player1, player2);
+        if (!player2.hand.empty() && !player1.hand.empty()) {
+            AI(player2, player1);
+        }
+    }
+    //Определяем победителя
+    if (player1.hand.empty()) {
+        std::cout << player2.getName() << " wins!" << std::endl;
+    } else {
+        std::cout << player1.getName() << " wins!" << std::endl;
+    }
 
-    std::cout << "PvE mode not ready yet." << std::endl;
+    std::cout << player1.getName() << " Score: " << player1.getScore() << std::endl;
+    std::cout << player2.getName() << " Score: " << player2.getScore() << std::endl;
 }
 
 void Game::loadGame() {
@@ -83,14 +102,31 @@ Card Game::generateRandomCard() {
 
     return Card(rarity, type, health, strength); //Создаём и возвращаем карту
 }
-
+void Game::AI(Player& player, Player& opponent){
+    if (player.canUseSuperPower()) {
+        SuperPower power;
+        power = SuperPower::FIRE;
+        int index1 = 1;
+        size_t cardIndex1 = static_cast<size_t>(index1 - 1);
+        std::cout << player.getName() << " uses superpower " << superPowerToString(power) << " to attack " << opponent.hand[cardIndex1].toString() << std::endl;
+        //Применяем супер силу
+        player.useSuperPower(power, opponent);
+    }else{
+        int index1 = 1;
+        int index2 = 1;
+        size_t cardIndex1 = static_cast<size_t>(index1 - 1);
+	size_t cardIndex2 = static_cast<size_t>(index2 - 1);
+        player.playCard(cardIndex1, opponent, cardIndex2); //атакуем соперника
+        
+    }
+}
 void Game::playerTurn(Player& player, Player& opponent) {
     std::cout << "\n" << player.getName() << "'s turn:" << std::endl;
-    //Выводи карты игрока
+    //Выводит карты игрока
     player.printHand();
     std::cout << "Mana: " << player.getMana() << std::endl;
     std::cout << "" << std::endl;
-    //Выводи карты соперника
+    //Выводит карты соперника
     opponent.printHand();
     std::cout << "" << std::endl;
     std::cout << "Actions:" << std::endl;

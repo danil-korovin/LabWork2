@@ -16,6 +16,7 @@ private:
     void dealInitialHands(Player& player1, Player& player2); // Раздает начальные карты игрокам. Принимает ссылки на объекты Player.
     Card generateRandomCard();  // Генерирует случайную карту. Возвращает объект Card.
     void playerTurn(Player& player, Player& opponent); // Реализует ход игрока. Принимает ссылки на игроков.
+    void AI(Player& player, Player& opponent); // Реализует ход компьютера. Принимает ссылки на игроков.
 };
 
 #endif
