@@ -1,0 +1,38 @@
+Menu
+When the game starts, the player enters the start menu, in which he chooses one of several options for action:
+1. New game PvP - Two players are playing.
+2. New game PvE - The player is playing against an AI.
+3. Continue - Continuation of the previous game.
+4. Load Game
+5. Save Game
+6. Exit
+
+Gameplay
+During your turn, you need to press several buttons.
+The first number indicates the player's action, and the second and third numbers indicate the card indexes in the deck.
+Actions of the first number:
+1 - Attack.
+Example: 1 3 5 - third your own card attacks fifth of the opponent's cards.
+2 - Combining cards
+Example: 2 2 3 - combining the second and third cards from your own deck.
+3 - Super strength.
+Example: 3 1 - using first type of super power 
+4 - Show score points
+Example: 4 - show score points
+5 - Save the game
+Example: 5 - save the game
+6 - Completion of the game
+Example: 6 - finish the game
+
+Scenario 1: Victory. 
+Defeating the player. Destroy all the opponent's cards while preserving any number of their cards.
+Scenario 2: Victory. 
+Victory over AI. Destroy all AI cards while saving any number of your cards.
+Scenario 3: Defeat. 
+The opponent's victory. Destroy all your own cards while preserving any number of the opponent's cards.
+Scenario 4: Defeat. 
+AI victory. Destroy all your own cards while preserving any number of AI cards.
+Scenario 5: Draw. 
+The player and AI have any number of remaining cards at the time of exiting the game.
+Scenario 6: Draw. 
+Both players have any number of remaining cards at the time of exiting the game.
