@@ -1,11 +1,16 @@
+/* Korovin Danil st128737@student.spbu.ru
+   LabWork2
+*/
 #include <iostream>
 #include "game.h"
 
-int main() {
+int main()
+{
     Game game;
     int choice;
-    
-    while (true) {
+
+    while (true)
+    {
         std::cout << "Welcome to the 'CARD GAME'" << std::endl;
         std::cout << std::endl;
         std::cout << "Main rules of the game:" << std::endl;
@@ -22,22 +27,35 @@ int main() {
         std::cout << "4. Records" << std::endl;
         std::cout << "5. Save game" << std::endl;
         std::cout << "6. Exit" << std::endl;
-        
+
         std::cin >> choice;
 
-        if (choice == 1) {
+        if (choice == 1)
+        {
             game.playPvP();
-        } else if (choice == 2) {
+        }
+        else if (choice == 2)
+        {
             game.playPvE();
-        } else if (choice == 3) {
+        }
+        else if (choice == 3)
+        {
             game.loadGame();
-        } else if (choice == 4) {
+        }
+        else if (choice == 4)
+        {
             game.showHighScores();
-        } else if (choice == 5) {
-            game.saveGame(); 
-        } else if (choice == 6) {
+        }
+        else if (choice == 5)
+        {
+            game.saveGame();
+        }
+        else if (choice == 6)
+        {
             return 0;
-        } else {
+        }
+        else
+        {
             std::cout << "Wrong choice." << std::endl;
         }
     }

@@ -1,7 +1,11 @@
+/* Korovin Danil st128737@student.spbu.ru
+   LabWork2
+*/
 #include "gtest/gtest.h"
 #include "card.h"
 
-TEST(CardTest, CardCreation) {
+TEST(CardTest, CardCreation)
+{
     Card card(Rarity::RARE, CardType::WIZARD, 100, 20);
     ASSERT_EQ(card.rarity, Rarity::RARE);
     ASSERT_EQ(card.type, CardType::WIZARD);
@@ -10,21 +14,24 @@ TEST(CardTest, CardCreation) {
     ASSERT_EQ(card.mana, 0);
 }
 
-TEST(CardTest, RarityToString) {
+TEST(CardTest, RarityToString)
+{
     ASSERT_EQ(rarityToString(Rarity::LEGENDARY), "Legendary");
     ASSERT_EQ(rarityToString(Rarity::ORDINARY), "Ordinary");
 }
 
-TEST(CardTest, CardToString) {
+TEST(CardTest, CardToString)
+{
     Card card(Rarity::EPIC, CardType::KNIGHT, 150, 30);
     ASSERT_EQ(card.toString(), "Epic Knight (150 HP, 30 STR)");
 }
 
-TEST(CardTest, CardEquality) {
+TEST(CardTest, CardEquality)
+{
     Card card1(Rarity::RARE, CardType::WIZARD, 100, 20);
-    Card card2(Rarity::RARE, CardType::WIZARD, 120, 25); 
+    Card card2(Rarity::RARE, CardType::WIZARD, 120, 25);
     Card card3(Rarity::EPIC, CardType::WIZARD, 100, 20);
 
-    ASSERT_TRUE(card1 == card2); 
-    ASSERT_FALSE(card1 == card3); 
+    ASSERT_TRUE(card1 == card2);
+    ASSERT_FALSE(card1 == card3);
 }

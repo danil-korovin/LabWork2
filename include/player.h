@@ -1,10 +1,14 @@
+/* Korovin Danil st128737@student.spbu.ru
+   LabWork2
+*/
 #ifndef PLAYER_H
 #define PLAYER_H
 
 #include <vector>
 #include "card.h"
 
-class Player {
+class Player
+{
 public:
     std::vector<Card> hand;
     std::string name;
@@ -25,7 +29,7 @@ public:
     void resetMana(); // Сбрасывает ману игрока
     bool canUseSuperPower() const; // Проверяет, может ли игрок использовать свою суперспособность
     void addScore(int points); // Добавляет очки к счету игрока.
-    
+
 };
 
 #endif

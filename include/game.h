@@ -1,17 +1,21 @@
+/* Korovin Danil st128737@student.spbu.ru
+   LabWork2
+*/
 #ifndef GAME_H
 #define GAME_H
 
 #include "player.h"
 
-class Game {
+class Game
+{
 public:
     Game(); // Конструктор класса Game.
     void playPvP(); // Запускает PvP
     void playPvE(); // Запускает PvE
-    void loadGame(); // Загружает сохраненную игру 
+    void loadGame(); // Загружает сохраненную игру
     void saveGame(); // Сохраняет текущее состояние
     void showHighScores(); // Показывает рекорды
-    
+
 private:
     void dealInitialHands(Player& player1, Player& player2); // Раздает начальные карты игрокам. Принимает ссылки на объекты Player.
     Card generateRandomCard();  // Генерирует случайную карту. Возвращает объект Card.

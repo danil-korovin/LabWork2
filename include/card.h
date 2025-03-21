@@ -1,9 +1,13 @@
+/* Korovin Danil st128737@student.spbu.ru
+   LabWork2
+*/
 #ifndef CARD_H
 #define CARD_H
 #include <string>
 //Для ограниченного набора именнованных значений используем enum class
 // Перечисление для редкости карт.
-enum class Rarity {
+enum class Rarity
+{
     ORDINARY,
     RARE,
     EPIC,
@@ -11,7 +15,8 @@ enum class Rarity {
 };
 
 // Перечисление для типов карт.
-enum class CardType {
+enum class CardType
+{
     NINJA,
     WIZARD,
     ARCHER,
@@ -20,7 +25,8 @@ enum class CardType {
 };
 
 // Перечисление для суперспособностей.
-enum class SuperPower {
+enum class SuperPower
+{
     NONE,
     FIRE,
     FREEZE,
@@ -33,20 +39,21 @@ std::string cardTypeToString(CardType type);
 std::string superPowerToString(SuperPower power);
 
 // Структуру для представления карты.
-class Card {
+class Card
+{
 public:
     Rarity rarity;
     CardType type;
     int health;
     int strength;
     int mana;
-    
+
     // Конструктор для инициализации объекта Card.
-    Card(Rarity r, CardType t, int h, int s) : 
+    Card(Rarity r, CardType t, int h, int s) :
         rarity(r),
-        type(t), 
-        health(h), 
-        strength(s), 
+        type(t),
+        health(h),
+        strength(s),
         mana(0) {}
     // Функция для вывода информации о карте.
     void printCard();

@@ -1,30 +1,40 @@
+/* Korovin Danil st128737@student.spbu.ru
+   LabWork2
+*/
 #include "game.h"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include <fstream>
 
-Game::Game() {
+Game::Game()
+{
     srand(time(0)); // задаём генератор случайных чисел на основе текущего времени
 }
 
-void Game::playPvP() {
+void Game::playPvP()
+{
     //Создаём игроков
     Player player1("Player 1");
     Player player2("Player 2");
     //Раздаём карты игрокам
     dealInitialHands(player1, player2);
     //Определяем чей ход
-    while (!player1.hand.empty() && !player2.hand.empty()) {
+    while (!player1.hand.empty() && !player2.hand.empty())
+    {
         playerTurn(player1, player2);
-        if (!player2.hand.empty() && !player1.hand.empty()) {
+        if (!player2.hand.empty() && !player1.hand.empty())
+        {
             playerTurn(player2, player1);
         }
     }
     //Определяем победителя
-    if (player1.hand.empty()) {
+    if (player1.hand.empty())
+    {
         std::cout << player2.getName() << " wins!" << std::endl;
-    } else {
+    }
+    else
+    {
         std::cout << player1.getName() << " wins!" << std::endl;
     }
 
@@ -32,23 +42,29 @@ void Game::playPvP() {
     std::cout << player2.getName() << " Score: " << player2.getScore() << std::endl;
 }
 
-void Game::playPvE() {
+void Game::playPvE()
+{
     //Создаём игроков
     Player player1("Player 1");
     Player player2("CPU");
     //Раздаём карты игрокам
     dealInitialHands(player1, player2);
     //Определяем чей ход
-    while (!player1.hand.empty() && !player2.hand.empty()) {
+    while (!player1.hand.empty() && !player2.hand.empty())
+    {
         playerTurn(player1, player2);
-        if (!player2.hand.empty() && !player1.hand.empty()) {
+        if (!player2.hand.empty() && !player1.hand.empty())
+        {
             AI(player2, player1);
         }
     }
     //Определяем победителя
-    if (player1.hand.empty()) {
+    if (player1.hand.empty())
+    {
         std::cout << player2.getName() << " wins!" << std::endl;
-    } else {
+    }
+    else
+    {
         std::cout << player1.getName() << " wins!" << std::endl;
     }
 
@@ -56,54 +72,66 @@ void Game::playPvE() {
     std::cout << player2.getName() << " Score: " << player2.getScore() << std::endl;
 }
 
-void Game::loadGame() {
+void Game::loadGame()
+{
 
     std::cout << "Load game not ready yet." << std::endl;
 }
 
-void Game::saveGame() {
+void Game::saveGame()
+{
 
     std::cout << "Save game not ready yet." << std::endl;
 }
 
-void Game::showHighScores() {
+void Game::showHighScores()
+{
     std::cout << "High scores not ready yet." << std::endl;
 }
 //Добавление карт игрокам
-void Game::dealInitialHands(Player& player1, Player& player2) {
-    for (int i = 0; i < 7; ++i) {
+void Game::dealInitialHands(Player& player1, Player& player2)
+{
+    for (int i = 0; i < 7; ++i)
+    {
         player1.drawCard(generateRandomCard());
         player2.drawCard(generateRandomCard());
     }
 }
 //Случайная генерация карт
-Card Game::generateRandomCard() {
+Card Game::generateRandomCard()
+{
     Rarity rarity = static_cast<Rarity>(rand() % 4); //Случайная редкость
     CardType type = static_cast<CardType>(rand() % 5); //Случайный тип карты
-    int health; 
+    int health;
     int strength;
     // Баллансируем случайную генерацию карты
-    if (rarity == Rarity::ORDINARY){
-        health = rand() % 30 + 20; 
+    if (rarity == Rarity::ORDINARY)
+    {
+        health = rand() % 30 + 20;
         strength = rand() % 10 + 5;
     }
-    else if (rarity == Rarity::RARE){
-        health = rand() % 30 + 40; 
+    else if (rarity == Rarity::RARE)
+    {
+        health = rand() % 30 + 40;
         strength = rand() % 10 + 10;
     }
-    else if (rarity == Rarity::EPIC){
-        health = rand() % 30 + 60; 
+    else if (rarity == Rarity::EPIC)
+    {
+        health = rand() % 30 + 60;
         strength = rand() % 10 + 15;
     }
-    else if (rarity == Rarity::LEGENDARY){
-        health = rand() % 30 + 80; 
+    else if (rarity == Rarity::LEGENDARY)
+    {
+        health = rand() % 30 + 80;
         strength = rand() % 10 + 20;
     }
 
     return Card(rarity, type, health, strength); //Создаём и возвращаем карту
 }
-void Game::AI(Player& player, Player& opponent){
-    if (player.canUseSuperPower()) {
+void Game::AI(Player& player, Player& opponent)
+{
+    if (player.canUseSuperPower())
+    {
         SuperPower power;
         power = SuperPower::FIRE;
         int index1 = 1;
@@ -111,16 +139,19 @@ void Game::AI(Player& player, Player& opponent){
         std::cout << player.getName() << " uses superpower " << superPowerToString(power) << " to attack " << opponent.hand[cardIndex1].toString() << std::endl;
         //Применяем супер силу
         player.useSuperPower(power, opponent);
-    }else{
+    }
+    else
+    {
         int index1 = 1;
         int index2 = 1;
         size_t cardIndex1 = static_cast<size_t>(index1 - 1);
-	size_t cardIndex2 = static_cast<size_t>(index2 - 1);
+        size_t cardIndex2 = static_cast<size_t>(index2 - 1);
         player.playCard(cardIndex1, opponent, cardIndex2); //атакуем соперника
-        
+
     }
 }
-void Game::playerTurn(Player& player, Player& opponent) {
+void Game::playerTurn(Player& player, Player& opponent)
+{
     std::cout << "\n" << player.getName() << "'s turn:" << std::endl;
     //Выводит карты игрока
     player.printHand();
@@ -138,86 +169,121 @@ void Game::playerTurn(Player& player, Player& opponent) {
     std::cout << "press 6 to exit game" << std::endl;
     int action;
 
-    std::cin >> action; 
+    std::cin >> action;
 
-    if (action == 1) {
+    if (action == 1)
+    {
         //Работаем с индексами карт
         int index1, index2;
         std::cin >> index1 >> index2;
-	    if (index1 <= 0 || index2 <= 0) {
-		std::cout << "Card indexe must be bigger than 0." << std::endl;
-		return;
-	    }
-	// Преобразуем индексы в тип size_t и уменьшаем на единицу
-	size_t cardIndex1 = static_cast<size_t>(index1 - 1);
-	size_t cardIndex2 = static_cast<size_t>(index2 - 1);
-	//Проверка индексов карт
-        if (cardIndex1 < player.hand.size() && cardIndex2 < opponent.hand.size()) {
+        if (index1 <= 0 || index2 <= 0)
+        {
+            std::cout << "Card indexe must be bigger than 0." << std::endl;
+            return;
+        }
+        // Преобразуем индексы в тип size_t и уменьшаем на единицу
+        size_t cardIndex1 = static_cast<size_t>(index1 - 1);
+        size_t cardIndex2 = static_cast<size_t>(index2 - 1);
+        //Проверка индексов карт
+        if (cardIndex1 < player.hand.size() && cardIndex2 < opponent.hand.size())
+        {
             player.playCard(cardIndex1, opponent, cardIndex2); //атакуем соперника
-        } else {
+        }
+        else
+        {
             std::cout << "Wrong card index." << std::endl;
         }
-    } else if (action == 2) {
+    }
+    else if (action == 2)
+    {
         //Повторяем тоже, что и в (action = 1)
-    	int index1, index2;
+        int index1, index2;
         std::cin >> index1 >> index2;
-	    if (index1 <= 0 || index2 <= 0) {
-		std::cout << "Card indexe must be bigger than 0." << std::endl;
-		return;
-	    }
-	size_t cardIndex1 = static_cast<size_t>(index1 - 1);
-	size_t cardIndex2 = static_cast<size_t>(index2 - 1);
-        if (cardIndex1 < player.hand.size() && cardIndex2 < player.hand.size()) {
+        if (index1 <= 0 || index2 <= 0)
+        {
+            std::cout << "Card indexe must be bigger than 0." << std::endl;
+            return;
+        }
+        size_t cardIndex1 = static_cast<size_t>(index1 - 1);
+        size_t cardIndex2 = static_cast<size_t>(index2 - 1);
+        if (cardIndex1 < player.hand.size() && cardIndex2 < player.hand.size())
+        {
             player.mergeCards(cardIndex1, cardIndex2); //объединяем карты
-        } else {
+        }
+        else
+        {
             std::cout << "Wrong card index." << std::endl;
         }
-    } else if (action == 3) {
+    }
+    else if (action == 3)
+    {
         //Повторяем тоже, что и в (action = 1) только для одного индекса
-    	int index1;
+        int index1;
         std::cin >> index1;
-	    if (index1 <= 0) {
-		std::cout << "Card indexe must be bigger than 0." << std::endl;
-		return;
-	    }
-	size_t cardIndex1 = static_cast<size_t>(index1 - 1);
-        if (cardIndex1 < opponent.hand.size()) {
-            if (player.canUseSuperPower()) {
+        if (index1 <= 0)
+        {
+            std::cout << "Card indexe must be bigger than 0." << std::endl;
+            return;
+        }
+        size_t cardIndex1 = static_cast<size_t>(index1 - 1);
+        if (cardIndex1 < opponent.hand.size())
+        {
+            if (player.canUseSuperPower())
+            {
                 int powerChoice;
                 std::cout << "Choose a superpower:\n1. Fire\n2. Freeze\n3. Storm\n";
                 std::cin >> powerChoice;
                 //Выбираем супер силу
                 SuperPower power;
-                if (powerChoice == 1) {
+                if (powerChoice == 1)
+                {
                     power = SuperPower::FIRE;
-                } else if (powerChoice == 2) {
+                }
+                else if (powerChoice == 2)
+                {
                     power = SuperPower::FREEZE;
-                } else if (powerChoice == 3) {
+                }
+                else if (powerChoice == 3)
+                {
                     power = SuperPower::STORM;
-                } else {
+                }
+                else
+                {
                     std::cout << "Wrong choice of superpower." << std::endl;
                     return;
                 }
                 std::cout << player.getName() << " uses superpower " << superPowerToString(power) << " to attack " << opponent.hand[cardIndex1].toString() << std::endl;
                 //Применяем супер силу
                 player.useSuperPower(power, opponent);
-            } else {
+            }
+            else
+            {
                 std::cout << "Not enough mana to use superpower." << std::endl;
             }
-        } else {
+        }
+        else
+        {
             std::cout << "Wrong card index." << std::endl;
         }
-    } else if (action == 4) {
+    }
+    else if (action == 4)
+    {
         //Выводим счёт
         std::cout << player.getName() << " Score: " << player.getScore() << std::endl;
         std::cout << opponent.getName() << " Score: " << opponent.getScore() << std::endl;
-    } else if (action == 5) {
+    }
+    else if (action == 5)
+    {
         saveGame();
-    } else if (action == 6) {
+    }
+    else if (action == 6)
+    {
         //Выходим из игры
         std::cout << "Exit." << std::endl;
         exit(0);
-    } else {
+    }
+    else
+    {
         //Проверяем верность ввода
         std::cout << "Wrong action. You missed your turn." << std::endl;
     }

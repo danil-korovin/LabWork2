@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17 -Iinclude -g 
+CXXFLAGS = -Werror -Wpedantic -Wall -Wextra -std=c++17 -Iinclude -g 
 LDFLAGS = -lgtest -lgtest_main -pthread
 SRCDIR = src
 INCDIR = include
