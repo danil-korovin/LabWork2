@@ -23,7 +23,11 @@ jobs:
           sudo apt-get install -y build-essential libgtest-dev googletest
 
       - name: Build project
+        run: make -f Makefile
+
+      - name: Build test
         run: make test
 
       - name: Run tests
-        run: ./test-game
+        run: ./card_game_tests
+

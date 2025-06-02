@@ -1,43 +1,44 @@
-PROJECT = main
-LIBPROJECT = $(PROJECT).a
-TESTPROJECT = test-$(PROJECT)
 CXX = g++
-A = ar
-AFLAGS = rsv
-CСXFLAGS = -I. -std=c++17 -Werror -Wpedantic -Wall -g -fPIC
-LDXXFLAGS = $(CCXFLAGS) -L. -l:$(LIBPROJECT)
-LDGTESTFLAGS = $(LDXXFLAGS) -lgtest -lgtest_main -lpthread
-DEPS=$(wildcard *.h)
-OBJ=Main.o
-TEST-OBJ=GoogleTest.o
-
-.PHONY: default
-
-default: all;
-
-%.o: %.cpp $(DEPS)
-	$(CXX) -c -o $@ $< $(CXXFLAGS)
-
-$(LIBPROJECT): $(OBJ)
-	$(A) $(AFLAGS) $@ $^
-
-$(PROJECT): Main.o $(LIBPROJECT)
-	$(CXX) -o $@ Main.o $(LDXXFLAGS)
+CXXFLAGS = -Werror -Wpedantic -Wall -Wextra -std=c++17 -Iinclude -g
+LDFLAGS = -lgtest -lgtest_main -pthread
+SRCDIR = src
+INCDIR = include
+TESTDIR = test
+BUILDDIR = build
+SOURCES = $(wildcard $(SRCDIR)/*.cpp)
+HEADERS = $(wildcard $(INCDIR)/*.h)
+OBJECTS = $(patsubst $(SRCDIR)/%.cpp,$(BUILDDIR)/%.o,$(SOURCES))
+TEST_SOURCES = $(wildcard $(TESTDIR)/*_test.cpp)
+TEST_OBJECTS = $(patsubst $(TESTDIR)/%.cpp,$(BUILDDIR)/%.o,$(TEST_SOURCES))
+TARGET = card_game
+TEST_TARGET = card_game_tests
+OBJ = $(BUILDDIR)/card.o $(BUILDDIR)/game.o $(BUILDDIR)/player.o 
 
 
-$(TESTPROJECT): $(LIBPROJECT) $(TEST-OBJ)
-	$(CXX) -o $@ $(TEST-OBJ) $(LDGTESTFLAGS)
+all: $(TARGET)
 
-test: $(TESTPROJECT)
+$(TARGET): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJECTS)
 
-all: $(PROJECT)
+$(BUILDDIR)/%.o: $(SRCDIR)/%.cpp $(HEADERS)
+	@mkdir -p $(BUILDDIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-.PHONY: clean
+test: $(TEST_TARGET)
 
+$(TEST_TARGET): $(TEST_OBJECTS)
+	$(CXX) $(CXXFLAGS) -o $(TEST_TARGET) $(TEST_OBJECTS) $(OBJ) $(LDFLAGS)
+
+$(BUILDDIR)/%_test.o: $(TESTDIR)/%_test.cpp $(HEADERS)
+	@mkdir -p $(BUILDDIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+	
+docs: Doxyfile
+	doxygen Doxyfile
+
+Doxyfile:
+	@echo "Doxyfile already exists.  Skipping Doxyfile generation."
 clean:
-	rm -f *.o
+	rm -rf $(BUILDDIR) $(TARGET) $(TEST_TARGET)docs
 
-cleanall: clean
-	rm -f $(PROJECT)
-	rm -f $(LIBPROJECT)
-	rm -f $(TESTPROJECT)
+
