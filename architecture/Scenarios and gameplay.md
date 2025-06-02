@@ -8,6 +8,7 @@ When the game starts, the player enters the start menu, in which he chooses one 
 6. Exit
 
 # Gameplay
+```
 During your turn, you need to press several buttons.
 The first number indicates the player's action, and the second and third numbers indicate the card indexes in the deck.
 Actions of the first number:
@@ -23,8 +24,10 @@ Example: 4 - show score points
 Example: 5 - save the game
 6 - Completion of the game
 Example: 6 - finish the game
+```
 
 # Scenario
+```
 Scenario 1: Victory. 
 Defeating the player. Destroy all the opponent's cards while preserving any number of their cards.
 Scenario 2: Victory. 
@@ -37,3 +40,4 @@ Scenario 5: Draw.
 The player and AI have any number of remaining cards at the time of exiting the game.
 Scenario 6: Draw. 
 Both players have any number of remaining cards at the time of exiting the game.
+```

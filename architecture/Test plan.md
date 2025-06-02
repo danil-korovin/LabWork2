@@ -1,5 +1,6 @@
 ### Test game using Google test
 #####Test plan:
+```
 1. Card Tests
 1.1 Card print
 1.2 Card creation
@@ -16,4 +17,4 @@
 3. Game Test
 3.1 Dealing cards
 3.2 Random generation tests
-
+```
