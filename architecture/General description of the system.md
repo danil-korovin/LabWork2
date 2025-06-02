@@ -1,7 +1,7 @@
-Description
+# Description
 "CARDS" is a card game for one or two players.
 
-Game rules:
+### Game rules:
 The order in which the game starts is determined randomly.
 At the beginning of the game, each player receives 7 random cards.
 The cards are divided into 5 types: Ninja, Wizard, Archer, Knight, Bishop.
@@ -21,7 +21,7 @@ The game continues until one of the player runs out of cards.
 The player who has the remaining cards wins and destroy.
 At the end of the game, player's score points appear.
 
-Tips:
+### Tips:
 1. It's not always best to combine cards for a winning strategy.
 2. It is best to attack the opponent's cards with the highest card strength.
 3. When mana reaches a certain value, it no longer accumulates.

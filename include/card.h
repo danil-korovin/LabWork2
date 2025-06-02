@@ -4,8 +4,8 @@
 #ifndef CARD_H
 #define CARD_H
 #include <string>
-//Для ограниченного набора именнованных значений используем enum class
-// Перечисление для редкости карт.
+//For a limited set of named values use the enum class
+// Enumeration for the rarity of the cards.
 enum class Rarity
 {
     ORDINARY,
@@ -14,7 +14,7 @@ enum class Rarity
     LEGENDARY
 };
 
-// Перечисление для типов карт.
+// Enumeration for card types.
 enum class CardType
 {
     NINJA,
@@ -24,7 +24,7 @@ enum class CardType
     BISHOP
 };
 
-// Перечисление для суперспособностей.
+// Enumeration for superpowers.
 enum class SuperPower
 {
     NONE,
@@ -33,12 +33,12 @@ enum class SuperPower
     STORM
 };
 
-// Функции для преобразования значений в строки.
+// Functions for converting values to strings.
 std::string rarityToString(Rarity rarity);
 std::string cardTypeToString(CardType type);
 std::string superPowerToString(SuperPower power);
 
-// Структуру для представления карты.
+// The structure for the card representation.
 class Card
 {
 public:
@@ -48,22 +48,22 @@ public:
     int strength;
     int mana;
 
-    // Конструктор для инициализации объекта Card.
+    // Constructor for initializing the Card object.
     Card(Rarity r, CardType t, int h, int s) :
         rarity(r),
         type(t),
         health(h),
         strength(s),
         mana(0) {}
-    // Функция для вывода информации о карте.
+    // A function for displaying information about the card.
     void printCard();
-    // Функция для преобразования информации о карте в строку
+    // A function for converting map information into a string
     std::string toString();
 };
-// Оператор для сравнения двух карт.
+// An operator for comparing two maps.
 bool operator==(const Card& a, const Card& b);
 
-// Функция улучшения редкости карты.
+// The function of improving the rarity of the card.
 Rarity upgradeRarity(Rarity rarity);
 
 #endif

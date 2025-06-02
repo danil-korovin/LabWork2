@@ -4,7 +4,7 @@
 #include "player.h"
 #include <iostream>
 
-// Конструктор класса Player
+// Constructor of the Player class
 Player::Player(std::string name):
     name(name),
     score(0),
@@ -13,32 +13,32 @@ Player::Player(std::string name):
 
 void Player::drawCard(const Card& card)
 {
-    // Добавляем копию карты в вектор hand
+    // Adding a copy of the card to the vector
     hand.push_back(card);
 }
 
 void Player::playCard(size_t cardIndex, Player& opponent, size_t targetCardIndex)
 {
-    //Проверка индексов карт
+    //Checking card indexes
     if (cardIndex >= hand.size() || targetCardIndex >= opponent.hand.size())
     {
         std::cout << "Wrong card index." << std::endl;
         return;
     }
 
-    // Получаем ссылки на атакующую и защищающуюся карты
+    // Get links to attacking and defending cards
     Card& attackingCard = hand[cardIndex];
     Card& defendingCard = opponent.hand[targetCardIndex];
 
     std::cout << name << " using " << attackingCard.toString()
               << " attacks " << defendingCard.toString() << std::endl;
-    // Наносим урон
+    // Dealing damage
     defendingCard.health -= attackingCard.strength;
     std::cout << "Card " << defendingCard.toString() << " received " << attackingCard.strength << " damage." << std::endl;
-    //Увеличиваем ману
+    // Increasing mana
     attackingCard.mana++;
     addMana(1);
-    //Проверка на уничтожение карты
+    // Checking for card destruction
     if (defendingCard.health <= 0)
     {
         std::cout << "Card " << defendingCard.toString() << " is destroyed!" << std::endl;
@@ -49,7 +49,7 @@ void Player::playCard(size_t cardIndex, Player& opponent, size_t targetCardIndex
 
 void Player::printHand()
 {
-    //Выводим карты
+    //Display the cards
     std::cout << name << "'s hand:" << std::endl;
     for (size_t i = 0; i < hand.size(); ++i)
     {
@@ -69,12 +69,12 @@ std::string Player::getName() const
 
 void Player::addScore(int points)
 {
-    score += points; //Добавляем очки
+    score += points; //Adding points
 }
 
 bool Player::canMergeCards(size_t cardIndex1, size_t cardIndex2) const
 {
-    //Проверка индексов карт
+    //Checking card indexes
     if (cardIndex1 >= hand.size() || cardIndex2 >= hand.size())
     {
         return false;
@@ -88,18 +88,18 @@ bool Player::canMergeCards(size_t cardIndex1, size_t cardIndex2) const
 
 bool Player::mergeCards(size_t cardIndex1, size_t cardIndex2)
 {
-    //Проверка на объединение карт
+    //Checking for card merge
     if (!canMergeCards(cardIndex1, cardIndex2))
     {
         std::cout << "It's impossible to combine these cards." << std::endl;
         return false;
     }
-    // Получаем ссылку на первую карту
+    // Get a link to the first card
     Card& card1 = hand[cardIndex1];
     card1.rarity = upgradeRarity(card1.rarity);
     card1.health *= 2;
     card1.strength *= 2;
-    // Удаляем вторую карту
+    // Deleting the second card
     hand.erase(hand.begin() + cardIndex2);
     std::cout << name << " combined cards!  New card: " << card1.toString() << std::endl;
     addScore(50);
@@ -108,7 +108,7 @@ bool Player::mergeCards(size_t cardIndex1, size_t cardIndex2)
 
 void Player::useSuperPower(SuperPower power, Player& opponent)
 {
-    //Проверка количества маны
+    //Checking mana
     if (mana < 5)
     {
         std::cout << "Not enough mana to use superpower." << std::endl;
@@ -117,7 +117,7 @@ void Player::useSuperPower(SuperPower power, Player& opponent)
     std::cout << name << " used " << superPowerToString(power) << "!" << std::endl;
     if (power == SuperPower::FIRE)
     {
-        //Огонь уменьшает у случайной карты 50% здоровья
+        //Fire reduces a random card's health by 50%.
         if (!opponent.hand.empty())
         {
             int randomIndex = rand() % opponent.hand.size();
@@ -137,13 +137,16 @@ void Player::useSuperPower(SuperPower power, Player& opponent)
     }
     else if (power == SuperPower::FREEZE)
     {
-        //Мороз замораживает противника на ход
-        std::cout << "Opponent is frozen and skips a move!" << std::endl;
-        return;
+        //FREEZE reduces all opponent's cards by 5 xp
+        for (Card& card : opponent.hand)
+        {
+            card.strength -= 5;
+            std::cout << "Opponent's card " << card.toString() << " lost 5 power!" << std::endl;
+        }
     }
     else if (power == SuperPower::STORM)
     {
-        //Шторм уменьшает у всех карт соперника по 10 хр
+        //Storm reduces all opponent's cards by 10 xp
         for (Card& card : opponent.hand)
         {
             card.health -= 10;
@@ -157,7 +160,7 @@ void Player::useSuperPower(SuperPower power, Player& opponent)
     }
 
     mana -= 5;
-    resetMana(); //сбрасываем ману
+    resetMana(); //Reset mana
 }
 
 int Player::getMana() const

@@ -1,4 +1,4 @@
-Menu
+# Menu
 When the game starts, the player enters the start menu, in which he chooses one of several options for action:
 1. New game PvP - Two players are playing.
 2. New game PvE - The player is playing against an AI.
@@ -7,7 +7,7 @@ When the game starts, the player enters the start menu, in which he chooses one 
 5. Save Game
 6. Exit
 
-Gameplay
+# Gameplay
 During your turn, you need to press several buttons.
 The first number indicates the player's action, and the second and third numbers indicate the card indexes in the deck.
 Actions of the first number:
@@ -24,6 +24,7 @@ Example: 5 - save the game
 6 - Completion of the game
 Example: 6 - finish the game
 
+# Scenario
 Scenario 1: Victory. 
 Defeating the player. Destroy all the opponent's cards while preserving any number of their cards.
 Scenario 2: Victory. 

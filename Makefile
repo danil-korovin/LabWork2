@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Werror -Wpedantic -Wall -Wextra -std=c++17 -Iinclude -g 
+CXXFLAGS = -Werror -Wpedantic -Wall -Wextra -std=c++17 -Iinclude -g
 LDFLAGS = -lgtest -lgtest_main -pthread
 SRCDIR = src
 INCDIR = include
@@ -12,6 +12,8 @@ TEST_SOURCES = $(wildcard $(TESTDIR)/*_test.cpp)
 TEST_OBJECTS = $(patsubst $(TESTDIR)/%.cpp,$(BUILDDIR)/%.o,$(TEST_SOURCES))
 TARGET = card_game
 TEST_TARGET = card_game_tests
+OBJ = $(BUILDDIR)/card.o $(BUILDDIR)/game.o $(BUILDDIR)/player.o 
+
 
 all: $(TARGET)
 
@@ -23,14 +25,20 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 test: $(TEST_TARGET)
-	./$(TEST_TARGET)
 
-$(TEST_TARGET): $(OBJECTS) $(TEST_OBJECTS)
-	$(CXX) $(CXXFLAGS) -o $(TEST_TARGET) $(OBJECTS) $(TEST_OBJECTS) $(LDFLAGS)
+$(TEST_TARGET): $(TEST_OBJECTS)
+	$(CXX) $(CXXFLAGS) -o $(TEST_TARGET) $(TEST_OBJECTS) $(OBJ) $(LDFLAGS)
 
 $(BUILDDIR)/%_test.o: $(TESTDIR)/%_test.cpp $(HEADERS)
 	@mkdir -p $(BUILDDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
+	
+docs: Doxyfile
+	doxygen Doxyfile
 
+Doxyfile:
+	@echo "Doxyfile already exists.  Skipping Doxyfile generation."
 clean:
-	rm -rf $(BUILDDIR) $(TARGET) $(TEST_TARGET)
+	rm -rf $(BUILDDIR) $(TARGET) $(TEST_TARGET)docs
+
+

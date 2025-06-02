@@ -4,7 +4,7 @@
 #include "card.h"
 #include <iostream>
 
-//Функция преобразования Rarity в строку
+//The function of converting Rarity to a string
 std::string rarityToString(Rarity rarity)
 {
     if (rarity == Rarity::ORDINARY)
@@ -25,11 +25,11 @@ std::string rarityToString(Rarity rarity)
     }
     else
     {
-        return "Unknown"; //Добавляем доп значение, чтобы избежать ошибки
+        return "Unknown"; //add an additional value to avoid an error
     }
 }
 
-// Функция преобразования CardType в строку
+// CardType to string conversion function
 std::string cardTypeToString(CardType type)
 {
     if (type == CardType::NINJA)
@@ -54,7 +54,7 @@ std::string cardTypeToString(CardType type)
     }
     else
     {
-        return "Unknown"; //Добавляем доп значение, чтобы избежать ошибки
+        return "Unknown"; //add an additional value to avoid an error
     }
 }
 
@@ -78,11 +78,11 @@ std::string superPowerToString(SuperPower power)
     }
     else
     {
-        return "Unknown"; //Добавляем доп значение, чтобы избежать ошибки
+        return "Unknown"; //add an additional value to avoid an error.
     }
 }
 
-//Для проверки созданной карты
+//check the created card
 void Card::printCard()
 {
     std::cout << "Rarity: " << rarityToString(rarity) << std::endl;
@@ -92,19 +92,19 @@ void Card::printCard()
     std::cout << "Mana: " << mana << std::endl;
 }
 
-//Вывод информации о карте
+//Displaying information about the card
 std::string Card::toString()
 {
     return rarityToString(rarity) + " " + cardTypeToString(type) + " (" + std::to_string(health) + " HP, " + std::to_string(strength) + " POWER)";
 }
 
-// Перегрузка оператора == для сравнения двух объектов Card
+// Operator == for comparing two Card objects
 bool operator==(const Card& a, const Card& b)
 {
     return a.rarity == b.rarity && a.type == b.type;
 }
 
-// Перегрузка оператора == для сравнения двух объектов Card
+// Operator == for comparing two Card objects
 Rarity upgradeRarity(Rarity rarity)
 {
     if (rarity == Rarity::ORDINARY)

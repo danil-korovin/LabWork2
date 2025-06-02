@@ -15,20 +15,20 @@ public:
     int score;
     SuperPower currentSuperPower;
     int mana;
-    Player(std::string name); // Конструктор класса Player
-    void drawCard(const Card& card); // Добавляет карту игроку
-    void playCard(size_t cardIndex, Player& opponent, size_t targetCardIndex);  // Атака картой противника
-    void printHand(); // Выводит на экран карты
-    bool canMergeCards(size_t cardIndex1, size_t cardIndex2) const; // Проверяет, может ли игрок объединить две карты
-    bool mergeCards(size_t cardIndex1, size_t cardIndex2); // Объединяет две карты игрока.
-    void useSuperPower(SuperPower power, Player& opponent);  // Использует суперспособность.
-    int getScore() const; // Возвращает текущий счет игрока.
-    std::string getName() const;  // Возвращает имя игрока.
-    int getMana() const;  // Возвращает текущее количество маны у игрока
-    void addMana(int amount); // Добавляет ману игроку
-    void resetMana(); // Сбрасывает ману игрока
-    bool canUseSuperPower() const; // Проверяет, может ли игрок использовать свою суперспособность
-    void addScore(int points); // Добавляет очки к счету игрока.
+    Player(std::string name); // Constructor of the Player class
+    void drawCard(const Card& card); // Adds a card to the player
+    void playCard(size_t cardIndex, Player& opponent, size_t targetCardIndex);  // Attacking with an opponent's card
+    void printHand(); // Displays cards on the screen
+    bool canMergeCards(size_t cardIndex1, size_t cardIndex2) const; // Checks if the player can combine two cards.
+    bool mergeCards(size_t cardIndex1, size_t cardIndex2); // Combines two player's cards.
+    void useSuperPower(SuperPower power, Player& opponent);  // Uses a superpower.
+    int getScore() const; // Returns the player's current score.
+    std::string getName() const;  // Returns the player's name.
+    int getMana() const;  // Returns the current amount of mana
+    void addMana(int amount); // Adds mana to the player
+    void resetMana(); //Drops the player's mana
+    bool canUseSuperPower() const; // Checks if the player can use his superpower.
+    void addScore(int points); // Adds points to the player's score.
 
 };
 

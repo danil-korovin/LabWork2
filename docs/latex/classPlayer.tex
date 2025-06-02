@@ -1,0 +1,71 @@
+\hypertarget{classPlayer}{}\doxysection{Player Class Reference}
+\label{classPlayer}\index{Player@{Player}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPlayer_af5aaea393030f959d568c806ca9100ca}\label{classPlayer_af5aaea393030f959d568c806ca9100ca}} 
+{\bfseries Player} (std\+::string name)
+\item 
+\mbox{\Hypertarget{classPlayer_a439b6a2ab8b35a015b79a2441e4d163f}\label{classPlayer_a439b6a2ab8b35a015b79a2441e4d163f}} 
+void {\bfseries draw\+Card} (const \mbox{\hyperlink{classCard}{Card}} \&card)
+\item 
+\mbox{\Hypertarget{classPlayer_ae2157c07d7a179dee0941edd1b5ff6fe}\label{classPlayer_ae2157c07d7a179dee0941edd1b5ff6fe}} 
+void {\bfseries play\+Card} (size\+\_\+t card\+Index, \mbox{\hyperlink{classPlayer}{Player}} \&opponent, size\+\_\+t target\+Card\+Index)
+\item 
+\mbox{\Hypertarget{classPlayer_a192664f65b9d7a72521059797be2e7da}\label{classPlayer_a192664f65b9d7a72521059797be2e7da}} 
+void {\bfseries print\+Hand} ()
+\item 
+\mbox{\Hypertarget{classPlayer_a59d136e13a7655f0211a527e2aa5edfd}\label{classPlayer_a59d136e13a7655f0211a527e2aa5edfd}} 
+bool {\bfseries can\+Merge\+Cards} (size\+\_\+t card\+Index1, size\+\_\+t card\+Index2) const
+\item 
+\mbox{\Hypertarget{classPlayer_aa04ac47e673402f85000feca6e23c685}\label{classPlayer_aa04ac47e673402f85000feca6e23c685}} 
+bool {\bfseries merge\+Cards} (size\+\_\+t card\+Index1, size\+\_\+t card\+Index2)
+\item 
+\mbox{\Hypertarget{classPlayer_aea385c10346a537270e97010f0729b13}\label{classPlayer_aea385c10346a537270e97010f0729b13}} 
+void {\bfseries use\+Super\+Power} (Super\+Power power, \mbox{\hyperlink{classPlayer}{Player}} \&opponent)
+\item 
+\mbox{\Hypertarget{classPlayer_acbdb2bae8d732157af0ca5f5438a2b63}\label{classPlayer_acbdb2bae8d732157af0ca5f5438a2b63}} 
+int {\bfseries get\+Score} () const
+\item 
+\mbox{\Hypertarget{classPlayer_a73e4ff2d70e62ca7e3be1d9b4ad9de85}\label{classPlayer_a73e4ff2d70e62ca7e3be1d9b4ad9de85}} 
+std\+::string {\bfseries get\+Name} () const
+\item 
+\mbox{\Hypertarget{classPlayer_aba42f377d067adc41cbc43e679b6349c}\label{classPlayer_aba42f377d067adc41cbc43e679b6349c}} 
+int {\bfseries get\+Mana} () const
+\item 
+\mbox{\Hypertarget{classPlayer_addff1c790965ad1b6ca5745a0fc849e0}\label{classPlayer_addff1c790965ad1b6ca5745a0fc849e0}} 
+void {\bfseries add\+Mana} (int amount)
+\item 
+\mbox{\Hypertarget{classPlayer_ad503807c4f6c857e5bb11527333e0e90}\label{classPlayer_ad503807c4f6c857e5bb11527333e0e90}} 
+void {\bfseries reset\+Mana} ()
+\item 
+\mbox{\Hypertarget{classPlayer_af3e46044e0d757d1ee78a5f33a00b082}\label{classPlayer_af3e46044e0d757d1ee78a5f33a00b082}} 
+bool {\bfseries can\+Use\+Super\+Power} () const
+\item 
+\mbox{\Hypertarget{classPlayer_aa4f77ba51081e8e66bf465421cab1694}\label{classPlayer_aa4f77ba51081e8e66bf465421cab1694}} 
+void {\bfseries add\+Score} (int points)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPlayer_a341f4a5a19505976ca53e84653f46462}\label{classPlayer_a341f4a5a19505976ca53e84653f46462}} 
+std\+::vector$<$ \mbox{\hyperlink{classCard}{Card}} $>$ {\bfseries hand}
+\item 
+\mbox{\Hypertarget{classPlayer_af9c920fabaafdeb7961a645315b521ff}\label{classPlayer_af9c920fabaafdeb7961a645315b521ff}} 
+std\+::string {\bfseries name}
+\item 
+\mbox{\Hypertarget{classPlayer_ace6abae8d66534ad0a1fd6458f786a6e}\label{classPlayer_ace6abae8d66534ad0a1fd6458f786a6e}} 
+int {\bfseries score}
+\item 
+\mbox{\Hypertarget{classPlayer_a4e41226aed15bead84927d4c22d542ed}\label{classPlayer_a4e41226aed15bead84927d4c22d542ed}} 
+Super\+Power {\bfseries current\+Super\+Power}
+\item 
+\mbox{\Hypertarget{classPlayer_a9a64ebab916a7b25ecdec767ba111ca7}\label{classPlayer_a9a64ebab916a7b25ecdec767ba111ca7}} 
+int {\bfseries mana}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/player.\+h\item 
+src/player.\+cpp\end{DoxyCompactItemize}
